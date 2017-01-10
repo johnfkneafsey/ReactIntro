@@ -1,14 +1,28 @@
-require('babel-polyfill');
-
+import 'babel-polyfill';
 import React from 'react';
-import ReactDOM  from 'react-dom';
+import ReactDOM from 'react-dom';
 
-import Card from './components/card';
-import List from './components/list';
 import Board from './components/board';
+import List from './components/list';
 
-//document.addEventListener('DOMContentLoaded', () =>
-//   ReactDOM.render(<Card />, document.getElementById('cardApp')));
+function onAddInputChanged() {
+    console.log("Input Changed");
+    var textInput = this.state.text.value();
+    console.log(textInput);
+    this.setState({text: textInput});
+}
 
-document.addEventListener('DOMContentLoaded', () =>
-    ReactDOM.render(<Board />, document.getElementById('cardApp')));
+function onAddSubmit(event) {
+    console.log("Submitted")
+    event.preventDefault();
+    var cardArray = this.state.cards.slice();
+    this.setState({cards: cardArray});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    ReactDOM.render(
+        //<Board title="Some title" lists={['List 1', 'List 2']}/>,
+        <List title="Some title" cards={['Card 1', 'Card 2']} onAddInputChanged={onAddInputChanged} onAddSubmit={onAddSubmit}/>,
+        document.getElementById('app')
+    );
+});

@@ -1,13 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import List from './list';
 
-export default function Board () {
+import ListContainer from './list-container';
+
+export default function Board(props) {
+    const lists = props.lists.map((title, index) => <List key={index} title={title} />);
     return (
         <div className="board">
-            <List />
-            <List />
-            <List />
+            <h1>{props.title}</h1>
+            {ListContainer}
         </div>
-    )
+    );
 }
+
+Board.defaultProps = {
+    lists: []
+};
+
+
+
+
+//need function for onAddInputChanged
